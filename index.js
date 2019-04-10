@@ -10,8 +10,7 @@ mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
 app.use(cors());
 app.use(function (req, res, next) {
     // Grant access to users
-    var origin = req.headers.origin;
-    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Origin', "*");
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
