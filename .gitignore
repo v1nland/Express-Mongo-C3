@@ -1,0 +1,6 @@
+#ignore all node_modules folders
+node_modules/
+.git/
+
+#ignore all logs
+*.log
