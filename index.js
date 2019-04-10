@@ -6,6 +6,9 @@ const app = express();
 // Mongoose database connection
 mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
 
+// Model register
+mongoose.model('ambients', {id: Number, name: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
+
 //CORS stuff
 app.use(cors());
 app.use(function (req, res, next) {
@@ -27,12 +30,36 @@ app.get('/', (req, res) => {
     res.send("Hello from Cobra III server");
 });
 
-// SEARCH FOR ALL AMBIENTS
-mongoose.model('ambients', {id: Number, name: String});
+// GET ALL AMBIENTS
 app.get('/ambients', (req, res) => {
     mongoose.model('ambients').find(function(err, ambients){
-        res.send(ambients);
+        if (err)
+            return res.send(err)
+        else
+            return res.json(ambients)
     })
+});
+
+// SEARCH AMBIENT BY ID
+app.get('/ambients/search', (req, res) => {
+    const { id } = req.query;
+
+    mongoose.model('ambients').find({ "id":id }, function(err, ambients){
+        if (err)
+            return res.send(err)
+        else
+            return res.json(ambients[0])
+    })
+});
+
+// SEARCH LATEST AMBIENT
+app.get('/ambients/latest', (req, res) => {
+    mongoose.model('ambients').find(function(err, ambients){
+        if (err)
+            return res.send(err)
+        else
+            return res.json(ambients[0])
+    }).limit(1).sort({$natural:-1})
 });
 
 // Console stuff
