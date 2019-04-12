@@ -7,7 +7,7 @@ const app = express();
 mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
 
 // Model register
-mongoose.model('ambients', {id: Number, name: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
+mongoose.model('ambients', {id: Number, nombre: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
 
 //CORS stuff
 app.use(cors());
@@ -60,6 +60,18 @@ app.get('/ambients/latest', (req, res) => {
         else
             return res.json(ambients[0])
     }).limit(1).sort({$natural:-1})
+});
+
+// ADD NEW AMBIENT
+app.get('/ambients/add', (req, res) => {
+    const { id, no, t, v, n } = req.query;
+
+    mongoose.model('ambients').create({ "id":id, "nombre":no, "temperatura":t, "viscosidad":v, "nutrientes":n}, function(err, resp){
+        if (err)
+            return res.send(err)
+        else
+            return res.send("Data inserted!")
+    })
 });
 
 // Console stuff
