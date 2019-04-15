@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Mongoose database connection
-mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
+// mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
+mongoose.connect('mongodb://v1nland:martin12@ds139896.mlab.com:39896/heroku_3wm2xj6s', {useNewUrlParser: true});
 
 // Model register
 mongoose.model('ambients', {id: Number, nombre: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
