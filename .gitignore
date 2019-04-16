@@ -4,3 +4,6 @@ node_modules/
 
 #ignore all logs
 *.log
+
+#ignore credentials
+credentials.js
