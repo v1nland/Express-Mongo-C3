@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const cred = require('./credentials');
+
 const app = express();
 
 // Mongoose database connection
-// mongoose.connect('mongodb://localhost/worldinapetri', {useNewUrlParser: true});
-mongoose.connect('mongodb://v1nland:martin12@ds139896.mlab.com:39896/heroku_3wm2xj6s', {useNewUrlParser: true});
+mongoose.connect('mongodb://'+cred.db.user+':'+cred.db.pass+'@'+cred.db.host+'/'+cred.db.name, {useNewUrlParser: true});
 
 // Model register
 mongoose.model('ambients', {id: Number, nombre: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
