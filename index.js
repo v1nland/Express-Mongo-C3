@@ -10,6 +10,7 @@ mongoose.connect('mongodb://'+cred.db.user+':'+cred.db.pass+'@'+cred.db.host+'/'
 
 // Model register
 mongoose.model('ambients', {id: Number, nombre: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
+moongose.model('items', {id: Number, nombre: String, descripcion : String, cantidad : Number});
 
 //CORS stuff
 app.use(cors());
@@ -75,6 +76,50 @@ app.get('/ambients/add', (req, res) => {
             return res.send("Data inserted!")
     })
 });
+
+
+
+
+
+
+
+// GET ALL ITEMS
+app.get('/items', (req, res) => {
+    mongoose.model('items').find(function(err, items){
+        if (err)
+            return res.send(err)
+        else
+            return res.json(items)
+    })
+});
+
+
+// SEARCH ITEM BY ID
+app.get('/items/search', (req, res) => {
+    const { id } = req.query;
+
+    mongoose.model('items').find({ "id":id }, function(err, items){
+        if (err)
+            return res.send(err)
+        else
+            return res.json(items[0])
+    })
+});
+
+
+// ADD NEW ITEM
+app.get('/items/add', (req, res) => {
+    const { id, no, d, c } = req.query;
+
+    mongoose.model('items').create({ "id":id, "nombre":no, "descripcion":d, "cantidad":c }, function(err, resp){
+        if (err)
+            return res.send(err)
+        else
+            return res.send("Data inserted!")
+    })
+});
+
+
 
 // Console stuff
 var port = process.env.PORT || 27019;
