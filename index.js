@@ -80,7 +80,7 @@ app.get('/ambients/add', (req, res) => {
 // RESET AMBIENTS
 app.get('/ambients/reset', (req, res) => {
 
-    mongoose.model('ambients').remove({}.exec(), function(err,resp){
+    mongoose.model('ambients').remove({}, function(err,resp){
         if (err)
             return res.send(err)
         else
