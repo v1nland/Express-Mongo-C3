@@ -10,7 +10,7 @@ mongoose.connect('mongodb://'+cred.db.user+':'+cred.db.pass+'@'+cred.db.host+'/'
 
 // Model register
 mongoose.model('ambients', {id: Number, nombre: String, viscosidad: Number, temperatura: Number, nutrientes: Number});
-moongose.model('items', {id: Number, nombre: String, descripcion : String, cantidad : Number});
+mongoose.model('items', {id: Number, nombre: String, descripcion : String, cantidad : Number});
 
 //CORS stuff
 app.use(cors());
